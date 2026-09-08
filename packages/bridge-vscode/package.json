@@ -1,0 +1,65 @@
+{
+  "name": "coode-bridge",
+  "displayName": "dev-harness coode Bridge",
+  "description": "Send editor cursor context to the dev-harness coode desk server",
+  "version": "0.1.0",
+  "publisher": "coode",
+  "private": true,
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "coode",
+      "properties": {
+        "coode.serverUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:17420",
+          "description": "Base URL for the self-hosted coode server"
+        },
+        "coode.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Send cursor context to coode"
+        },
+        "coode.debounceMs": {
+          "type": "number",
+          "default": 300,
+          "minimum": 0,
+          "description": "Delay before sending cursor updates"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "coode.openPanel",
+        "title": "dev-harness: Open Desk"
+      },
+      {
+        "command": "coode.pushContext",
+        "title": "dev-harness: Push Context"
+      },
+      {
+        "command": "coode.toggleHolo",
+        "title": "dev-harness: Toggle Holographic Config"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "node esbuild.config.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "dev": "node esbuild.config.mjs --watch",
+    "package": "pnpm run build && vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.10",
+    "@types/vscode": "^1.90.0",
+    "esbuild": "^0.25.5",
+    "typescript": "^5.8.3"
+  }
+}

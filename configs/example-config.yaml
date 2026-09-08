@@ -1,0 +1,55 @@
+server:
+  host: 127.0.0.1
+  port: 17420
+
+display:
+  default: both
+  hoverDelayMs: 350
+  popup:
+    maxWidth: 420
+    offset:
+      x: 16
+      y: 16
+  panel:
+    dock: right
+  overlay:
+    enabled: true
+
+targets:
+  - id: cursor-editor
+    match:
+      process:
+        - cursor
+        - code
+        - Code
+    context: editor-bridge
+    enabled: true
+
+  - id: terminal
+    match:
+      process:
+        - alacritty
+        - kitty
+        - gnome-terminal
+    context: accessibility
+    enabled: false
+
+providers:
+  lsp:
+    enabled: true
+    languages:
+      - typescript
+      - javascript
+      - python
+      - go
+  imports:
+    enabled: true
+  diagnostics:
+    enabled: true
+  rules:
+    enabled: true
+
+rules:
+  - match: useEffect
+    title: React useEffect
+    body: Runs after render. Always specify a dependency array.

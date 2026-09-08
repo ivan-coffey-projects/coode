@@ -1,0 +1,22 @@
+{
+  "name": "coode",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Self-hosted contextual info popup and side panel for coding",
+  "scripts": {
+    "build": "pnpm -r --filter '!@coode/overlay' run build && pnpm --filter @coode/overlay run build",
+    "dev": "pnpm --parallel --filter @coode/server --filter @coode/panel run dev",
+    "dev:server": "pnpm --filter @coode/server run dev",
+    "dev:panel": "pnpm --filter @coode/panel run dev",
+    "dev:overlay": "pnpm --filter @coode/overlay run dev:tauri",
+    "dev:pet": "pnpm --filter @coode/pet run dev",
+    "start:pet": "pnpm --filter @coode/pet run start",
+    "start": "pnpm --filter @coode/server run start",
+    "test": "pnpm --filter @coode/core run build && pnpm -r --filter @coode/core --filter @coode/server run test",
+    "typecheck": "pnpm -r run typecheck"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@10.6.5"
+}

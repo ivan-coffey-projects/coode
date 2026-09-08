@@ -1,0 +1,60 @@
+server:
+  host: 127.0.0.1
+  port: 17420
+
+display:
+  default: both
+  hoverDelayMs: 350
+  popup:
+    maxWidth: 480
+    offset:
+      x: 20
+      y: 20
+  panel:
+    dock: right
+  overlay:
+    enabled: true
+
+targets:
+  - id: cursor-editor
+    match:
+      process:
+        - cursor
+        - code
+        - Code
+    context: editor-bridge
+    enabled: true
+
+  - id: desktop
+    match:
+      process:
+        - plasmashell
+        - kwin_wayland
+        - Xorg
+    context: harness-desk
+    enabled: true
+
+providers:
+  lsp:
+    enabled: true
+    languages:
+      - typescript
+      - javascript
+      - python
+      - go
+  imports:
+    enabled: true
+  diagnostics:
+    enabled: true
+  rules:
+    enabled: true
+  harness:
+    enabled: true
+
+rules:
+  - match: harness
+    title: dev-harness
+    body: Press Ctrl+Shift+H on overlay to toggle holographic config popup.
+  - match: mcp
+    title: MCP orchestration
+    body: MCP servers load from .cursor/mcp.json — desk panel shows full list.
